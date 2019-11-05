@@ -1,7 +1,7 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\DSP-PROJECT\Settings\ADAU1462\ADAU1462_IC_1_REG.h
+ * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\adau-spi\ADAU1462_IC 1\ADAU1462_IC_1_REG.h
  *
- * Created:        Monday, November 4, 2019 4:28:49 PM
+ * Created:        Friday, November 8, 2019 11:41:44 AM
  * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
@@ -353,7 +353,7 @@
 /* SERIAL_BYTE_4_0  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_4_0_IC_1_ADDR             0xF210
 #define REG_SERIAL_BYTE_4_0_IC_1_BYTE             2
-#define REG_SERIAL_BYTE_4_0_IC_1_VALUE            0x9008
+#define REG_SERIAL_BYTE_4_0_IC_1_VALUE            0x9048
 
 /* SERIAL_BYTE_4_1  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_4_1_IC_1_ADDR             0xF211
@@ -363,7 +363,7 @@
 /* SERIAL_BYTE_5_0  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_5_0_IC_1_ADDR             0xF214
 #define REG_SERIAL_BYTE_5_0_IC_1_BYTE             2
-#define REG_SERIAL_BYTE_5_0_IC_1_VALUE            0x9008
+#define REG_SERIAL_BYTE_5_0_IC_1_VALUE            0x9048
 
 /* SERIAL_BYTE_5_1  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_5_1_IC_1_ADDR             0xF215
@@ -373,7 +373,7 @@
 /* SERIAL_BYTE_6_0  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_6_0_IC_1_ADDR             0xF218
 #define REG_SERIAL_BYTE_6_0_IC_1_BYTE             2
-#define REG_SERIAL_BYTE_6_0_IC_1_VALUE            0x9008
+#define REG_SERIAL_BYTE_6_0_IC_1_VALUE            0x9048
 
 /* SERIAL_BYTE_6_1  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_6_1_IC_1_ADDR             0xF219
@@ -383,7 +383,7 @@
 /* SERIAL_BYTE_7_0  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_7_0_IC_1_ADDR             0xF21C
 #define REG_SERIAL_BYTE_7_0_IC_1_BYTE             2
-#define REG_SERIAL_BYTE_7_0_IC_1_VALUE            0x9008
+#define REG_SERIAL_BYTE_7_0_IC_1_VALUE            0x9048
 
 /* SERIAL_BYTE_7_1  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_7_1_IC_1_ADDR             0xF21D
@@ -3548,7 +3548,7 @@
 /* SERIAL_BYTE_4_0 (IC 1) */
 #define R66_SERIAL_BYTE_4_0_TDM_MODE_IC_1         0x0    /* 000b	[2:0] */
 #define R66_SERIAL_BYTE_4_0_DATA_FMT_IC_1         0x1    /* 01b	[4:3] */
-#define R66_SERIAL_BYTE_4_0_WORD_LEN_IC_1         0x0    /* 00b	[6:5] */
+#define R66_SERIAL_BYTE_4_0_WORD_LEN_IC_1         0x2    /* 10b	[6:5] */
 #define R66_SERIAL_BYTE_4_0_BCLK_POL_IC_1         0x0    /* 0b	[7] */
 #define R66_SERIAL_BYTE_4_0_LRCLK_POL_IC_1        0x0    /* 0b	[8] */
 #define R66_SERIAL_BYTE_4_0_LRCLK_MODE_IC_1       0x0    /* 0b	[9] */
@@ -3585,7 +3585,7 @@
 /* SERIAL_BYTE_5_0 (IC 1) */
 #define R68_SERIAL_BYTE_5_0_TDM_MODE_IC_1         0x0    /* 000b	[2:0] */
 #define R68_SERIAL_BYTE_5_0_DATA_FMT_IC_1         0x1    /* 01b	[4:3] */
-#define R68_SERIAL_BYTE_5_0_WORD_LEN_IC_1         0x0    /* 00b	[6:5] */
+#define R68_SERIAL_BYTE_5_0_WORD_LEN_IC_1         0x2    /* 10b	[6:5] */
 #define R68_SERIAL_BYTE_5_0_BCLK_POL_IC_1         0x0    /* 0b	[7] */
 #define R68_SERIAL_BYTE_5_0_LRCLK_POL_IC_1        0x0    /* 0b	[8] */
 #define R68_SERIAL_BYTE_5_0_LRCLK_MODE_IC_1       0x0    /* 0b	[9] */
@@ -3622,7 +3622,7 @@
 /* SERIAL_BYTE_6_0 (IC 1) */
 #define R70_SERIAL_BYTE_6_0_TDM_MODE_IC_1         0x0    /* 000b	[2:0] */
 #define R70_SERIAL_BYTE_6_0_DATA_FMT_IC_1         0x1    /* 01b	[4:3] */
-#define R70_SERIAL_BYTE_6_0_WORD_LEN_IC_1         0x0    /* 00b	[6:5] */
+#define R70_SERIAL_BYTE_6_0_WORD_LEN_IC_1         0x2    /* 10b	[6:5] */
 #define R70_SERIAL_BYTE_6_0_BCLK_POL_IC_1         0x0    /* 0b	[7] */
 #define R70_SERIAL_BYTE_6_0_LRCLK_POL_IC_1        0x0    /* 0b	[8] */
 #define R70_SERIAL_BYTE_6_0_LRCLK_MODE_IC_1       0x0    /* 0b	[9] */
@@ -3659,7 +3659,7 @@
 /* SERIAL_BYTE_7_0 (IC 1) */
 #define R72_SERIAL_BYTE_7_0_TDM_MODE_IC_1         0x0    /* 000b	[2:0] */
 #define R72_SERIAL_BYTE_7_0_DATA_FMT_IC_1         0x1    /* 01b	[4:3] */
-#define R72_SERIAL_BYTE_7_0_WORD_LEN_IC_1         0x0    /* 00b	[6:5] */
+#define R72_SERIAL_BYTE_7_0_WORD_LEN_IC_1         0x2    /* 10b	[6:5] */
 #define R72_SERIAL_BYTE_7_0_BCLK_POL_IC_1         0x0    /* 0b	[7] */
 #define R72_SERIAL_BYTE_7_0_LRCLK_POL_IC_1        0x0    /* 0b	[8] */
 #define R72_SERIAL_BYTE_7_0_LRCLK_MODE_IC_1       0x0    /* 0b	[9] */

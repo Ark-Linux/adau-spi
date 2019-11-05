@@ -1,4 +1,4 @@
-#compile ADAU1466
+#compile ADAU1462
 
-ADAU1466_Drv.out: ADAU1466_DRV.c
-	gcc ADAU1466_DRV.c -o ADAU1466.out
+ADAU1462_Drv.out: ADAU1462_DRV.c
+	gcc ADAU1462_DRV.c -o ADAU1462.out

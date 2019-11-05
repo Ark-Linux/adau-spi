@@ -14,14 +14,14 @@ do_configure () {
 }
 
 do_compile () {
-  ${CC} ADAU1466_DRV.c -o ADAU1466_DRV
+  ${CC} ADAU1462_DRV.c -o ADAU1462_DRV
 }
 
 do_install () {
 	install -d ${D}${bindir}/
-	install -m 0755 ${S}/ADAU1466_DRV ${D}${bindir}/
+	install -m 0755 ${S}/ADAU1462_DRV ${D}${bindir}/
 }
 
-FILES_${PN} = "${bindir}/ADAU1466_DRV"
+FILES_${PN} = "${bindir}/ADAU1462_DRV"
 
 
