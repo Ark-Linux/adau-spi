@@ -28,9 +28,12 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/spi/spidev.h>
-#include "ADAU1462_DRV.h"
+
+#include "sigma_tcp.h"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+
+static void spi_mode_enable(void);
 
 static void pabort(const char *s)
 {
@@ -44,13 +47,14 @@ static uint8_t bits = 8;
 static char *input_file;
 static char *output_file;
 static uint32_t speed = 1000000;
-static uint16_t delay = 0;
+static uint16_t delay=0;
 static int verbose;
 static int i2s_fd;
 char *input_tx;
 
 static void print_usage(const char *prog)
 {
+
 	printf("Usage: %s [-DsbdlHOLC3]\n", prog);
 	puts("  -D --device   device to use (default /dev/spidev1.1)\n"
 	     "  -s --speed    max speed (Hz)\n"
@@ -172,6 +176,21 @@ static void parse_opts(int argc, char *argv[])
 	}
 }
 
+static void spi_mode_enable(void)
+{
+	uint8_t buf[10] ={0x00};
+	int ret =0;
+	ret = write(i2s_fd,buf,10);
+	usleep(1000);
+	ret = write(i2s_fd,buf,10);
+	usleep(1000);
+	ret = write(i2s_fd,buf,10);
+	usleep(1000);
+	if(ret ==0)
+	  ret++;
+	else
+	  ret =0;
+}
 static int spi_open(int argc, char *argv[])
 {
 	int ret = 0;
@@ -182,6 +201,10 @@ static int spi_open(int argc, char *argv[])
 	if (i2s_fd < 0) {
 		pabort("can't open device");
 		return 1;
+	}
+	else
+	{
+		printf("spi open\n");
 	}
 
 	/*
@@ -232,28 +255,20 @@ static int spi_open(int argc, char *argv[])
 	printf("spi mode: 0x%x\n", mode);
 	printf("bits per word: %d\n", bits);
 	printf("max speed: %d Hz (%d KHz)\n", speed, speed/1000);
-
-        uint8_t buf[10] = {0x00};
-        ret = write(i2s_fd, buf, 10);
-	usleep(1000);
-	ret = write(i2s_fd, buf, 10);
-	usleep(1000);
-	ret = write(i2s_fd, buf, 10);
-	usleep(1000);
-
+	spi_mode_enable();
 	return 0;
 }
 
 static int spi_read(unsigned int addr, unsigned int len, uint8_t *data)
 {
 	int ret;
-	int out_fd;
-	uint8_t msg_buf[2];
+	//int out_fd;
+	uint8_t msg_buf[3];
 	struct spi_ioc_transfer xfer[2] = {
 		{
 		.tx_buf = (unsigned long)0,
 		.rx_buf = (unsigned long)0,
-		.len = 2,
+		.len = 3,
 		.delay_usecs = delay,
 		.speed_hz = speed,
 		.bits_per_word = bits,
@@ -267,11 +282,11 @@ static int spi_read(unsigned int addr, unsigned int len, uint8_t *data)
 		.bits_per_word = bits,
 		}
 	};
-
-	msg_buf[0] = addr >> 8;
-	msg_buf[1] = addr & 0xff;
+	msg_buf[0] = 0x01;
+	msg_buf[1] = addr >> 8;
+	msg_buf[2] = addr & 0xff;
 	xfer[0].tx_buf = (unsigned long)msg_buf;
-	xfer[0].len = 2;
+	xfer[0].len = 3;
 
 	if (mode & SPI_TX_QUAD)
 		xfer[0].tx_nbits = 4;
@@ -299,13 +314,14 @@ static int spi_read(unsigned int addr, unsigned int len, uint8_t *data)
 static int spi_write(unsigned int addr, unsigned int len, const uint8_t *data)
 {
 	int ret;
-	int out_fd;
-	uint8_t msg_buf[2];
+	int i;
+	//int out_fd;
+	uint8_t msg_buf[3];
 	struct spi_ioc_transfer xfer[2] = {
 		{
 		.tx_buf = (unsigned long)0,
 		.rx_buf = (unsigned long)0,
-		.len = 2,
+		.len = 3,
 		.delay_usecs = delay,
 		.speed_hz = speed,
 		.bits_per_word = bits,
@@ -319,11 +335,20 @@ static int spi_write(unsigned int addr, unsigned int len, const uint8_t *data)
 		.bits_per_word = bits,
 		}
 	};
-
-	msg_buf[0] = addr >> 8;
-	msg_buf[1] = addr & 0xff;
+	msg_buf[0] = 0; //chip spi address
+	msg_buf[1] = addr >> 8;
+	msg_buf[2] = addr & 0xff;
 	xfer[0].tx_buf = (unsigned long)msg_buf;
-	xfer[0].len = 2;
+	xfer[0].len = 3;
+	//printf("xfer[0].tx_buf:\n");
+	//for(i = 0; i < 3; i++)
+	//printf(" %.2x",*((char*)(xfer[0].tx_buf)+i));
+	//printf("\n");
+	
+	//printf("xfer[1].tx_buf:\n");
+	//for(i = 0; i < len; i++)
+	//printf(" %.2x",*((char*)(xfer[1].tx_buf)+i));
+	//printf("\n");
 
 	if (mode & SPI_TX_QUAD)
 		xfer[1].tx_nbits = 4;
@@ -348,171 +373,8 @@ static int spi_write(unsigned int addr, unsigned int len, const uint8_t *data)
 	return 0;
 }
 
-static int spi_dev_write(unsigned int dev_addr, unsigned int reg_addr, unsigned int len, const uint8_t *data)
-{
-#if 0
-	int ret = 0;
-	char buf[2];
-	
-	buf[0] = (dev_addr >> 0) & 0xff;
-	ret = write(i2s_fd, buf, 1);
-	if (ret < 0)
-	{
-		printf("write device address failed\n");
-		return 0;
-	}
-
-	buf[0] = (reg_addr >> 8) & 0xff;
-        buf[1] = (reg_addr >> 0) & 0xff;
-	ret = write(i2s_fd, buf, 2);
-	if (ret < 0)
-	{
-                printf("write register address failed\n");
-                return 0;
-        }
-
-	ret = write(i2s_fd, data, len);
-        if (ret < 0)
-        {
-                printf("write register address failed\n");
-                return 0;
-        }
-
-#else 
-        int ret;
-        int out_fd;
-	uint8_t msg_buf1[2];
-        uint8_t msg_buf2[2];
-        struct spi_ioc_transfer xfer[3] = {
-                {
-                .tx_buf = (unsigned long)0,
-                .rx_buf = (unsigned long)0,
-                .len = 1,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                },
-		{
-                .tx_buf = (unsigned long)0,
-                .rx_buf = (unsigned long)0,
-                .len = 2,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                },
-                {
-                .tx_buf = (unsigned long)data,
-                .rx_buf = (unsigned long)0,
-                .len = len,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                }
-        };
-
-        msg_buf1[0] = dev_addr & 0xff;
-        xfer[0].tx_buf = (unsigned long)msg_buf1;
-        xfer[0].len = 1;
-
-	msg_buf2[0] = reg_addr >> 8;
-        msg_buf2[1] = reg_addr & 0xff;
-        xfer[1].tx_buf = (unsigned long)msg_buf2;
-        xfer[1].len = 2;
-
-
-        if (mode & SPI_TX_QUAD)
-                xfer[2].tx_nbits = 4;
-        else if (mode & SPI_TX_DUAL)
-                xfer[2].tx_nbits = 2;
-        if (mode & SPI_RX_QUAD)
-                xfer[2].rx_nbits = 4;
-        else if (mode & SPI_RX_DUAL)
-                xfer[2].rx_nbits = 2;
-        if (!(mode & SPI_LOOP)) {
-                if (mode & (SPI_TX_QUAD | SPI_TX_DUAL))
-                        xfer[2].rx_buf = 0;
-                else if (mode & (SPI_RX_QUAD | SPI_RX_DUAL))
-                        xfer[2].tx_buf = 0;
-        }
-
-        ret = ioctl(i2s_fd, SPI_IOC_MESSAGE(3), xfer);
-        if (ret < 1) {
-                pabort("write: can't send spi message");
-                return 1;
-        }
-        return 0;
-#endif
-}
-
-static int spi_dev_read(unsigned int dev_addr, unsigned int reg_addr, unsigned int len, const uint8_t *data)
-{
-	int ret;
-        int out_fd;
-        uint8_t msg_buf1[2];
-        uint8_t msg_buf2[2];
-        struct spi_ioc_transfer xfer[3] = {
-                {
-                .tx_buf = (unsigned long)0,
-                .rx_buf = (unsigned long)0,
-                .len = 1,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                },
-                {
-                .tx_buf = (unsigned long)0,
-                .rx_buf = (unsigned long)0,
-                .len = 2,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                },
-                {
-                .tx_buf = (unsigned long)0,
-                .rx_buf = (unsigned long)data,
-                .len = len,
-                .delay_usecs = delay,
-                .speed_hz = speed,
-                .bits_per_word = bits,
-                }
-        };
-
-        msg_buf1[0] = dev_addr & 0xff;
-        xfer[0].tx_buf = (unsigned long)msg_buf1;
-        xfer[0].len = 1;
-
-        msg_buf2[0] = reg_addr >> 8;
-        msg_buf2[1] = reg_addr & 0xff;
-        xfer[1].tx_buf = (unsigned long)msg_buf2;
-        xfer[1].len = 2;
-
-        if (mode & SPI_TX_QUAD)
-                xfer[0].tx_nbits = 4;
-        else if (mode & SPI_TX_DUAL)
-                xfer[0].tx_nbits = 2;
-        if (mode & SPI_RX_QUAD)
-                xfer[0].rx_nbits = 4;
-        else if (mode & SPI_RX_DUAL)
-                xfer[0].rx_nbits = 2;
-        if (!(mode & SPI_LOOP)) {
-                if (mode & (SPI_TX_QUAD | SPI_TX_DUAL))
-                        xfer[0].rx_buf = 0;
-                else if (mode & (SPI_RX_QUAD | SPI_RX_DUAL))
-                        xfer[0].tx_buf = 0;
-        }
-
-        ret = ioctl(i2s_fd, SPI_IOC_MESSAGE(3), xfer);
-        if (ret < 1) {
-                pabort("read: can't send spi message");
-                return 1;
-        }
-        return 0;
-}
-
 const struct backend_ops spi_backend_ops = {
 	.open = spi_open,
 	.read = spi_read,
 	.write = spi_write,
-	.adi_dsp_write = spi_dev_write,
-	.adi_dsp_read = spi_dev_read,
 };
