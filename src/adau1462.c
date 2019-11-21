@@ -28,9 +28,9 @@ TYMPHANY LTD
 #include <netinet/if_ether.h>
 #include <sys/ioctl.h>
 
-#include "spi.c"
+#include "spi.h"
 
-#include "ADAU1462_DRV.h"
+#include "adau1462.h"
 #include "ADAU1462_IC_1.h"
 #include "ADAU1462_IC_1_PARAM.h"
 
@@ -48,14 +48,14 @@ int main(int argc, char *argv[])
 	int i;
 	char buf[8] = {0, 0, 0, 0, 1};
 	printf("ADAU1462 init \n");
-	if(0 != spi_open(argc, argv))
+	if(0 != spi_backend_ops.open(argc, argv))
 	{
 		printf("ADAU166 Init failed!!!\n");
 		return 0;
 	}
 	default_download_IC_1();
 
-	spi_backend_ops.adi_dsp_read(1, 30, 4, buf);
+	spi_backend_ops.read(30, 4, buf);
 	printf("init done and read address 0x1E:\n");
         for(i = 0; i < 4; i++)
         printf(" %.2x",buf[i]);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	for(i = 0; i < 8; i++)
                 buf[i] = 0;
 
-	spi_backend_ops.adi_dsp_read(1, 31, 8, buf);
+	spi_backend_ops.read(31, 8, buf);
         printf("init done and read address 0x1F:\n");
         for(i = 0; i < 8; i++)
         printf(" %.2x",buf[i]);
