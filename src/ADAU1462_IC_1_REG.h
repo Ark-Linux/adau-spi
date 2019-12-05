@@ -1,8 +1,8 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\adau-spi\ADAU1462_IC 1\ADAU1462_IC_1_REG.h
+ * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\up\ADAU1462_IC_1_REG.h
  *
- * Created:        Friday, November 8, 2019 11:41:44 AM
- * Description:    ADAU1462:IC 1 control register definitions.
+ * Created:        Thursday, December 5, 2019 4:53:18 PM
+ * Description:    20191203_Zeppelin_NG_EQ0.02:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
