@@ -1,7 +1,7 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\adau-spi\ADAU1462_IC 1\ADAU1462_IC_1_REG.h
+ * File:           C:\Users\Daniel.li\Desktop\temp\ADAU1462_IC_1_REG.h
  *
- * Created:        Friday, November 8, 2019 11:41:44 AM
+ * Created:        Wednesday, December 11, 2019 10:54:06 PM
  * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
@@ -363,7 +363,7 @@
 /* SERIAL_BYTE_5_0  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_5_0_IC_1_ADDR             0xF214
 #define REG_SERIAL_BYTE_5_0_IC_1_BYTE             2
-#define REG_SERIAL_BYTE_5_0_IC_1_VALUE            0x9048
+#define REG_SERIAL_BYTE_5_0_IC_1_VALUE            0x8848
 
 /* SERIAL_BYTE_5_1  - Registers (IC 1) */
 #define REG_SERIAL_BYTE_5_1_IC_1_ADDR             0xF215
@@ -3589,7 +3589,7 @@
 #define R68_SERIAL_BYTE_5_0_BCLK_POL_IC_1         0x0    /* 0b	[7] */
 #define R68_SERIAL_BYTE_5_0_LRCLK_POL_IC_1        0x0    /* 0b	[8] */
 #define R68_SERIAL_BYTE_5_0_LRCLK_MODE_IC_1       0x0    /* 0b	[9] */
-#define R68_SERIAL_BYTE_5_0_BCLK_SRC_IC_1         0x4    /* 100b	[12:10] */
+#define R68_SERIAL_BYTE_5_0_BCLK_SRC_IC_1         0x2    /* 010b	[12:10] */
 #define R68_SERIAL_BYTE_5_0_LRCLK_SRC_IC_1        0x4    /* 100b	[15:13] */
 #define R68_SERIAL_BYTE_5_0_TDM_MODE_IC_1_MASK    0x7
 #define R68_SERIAL_BYTE_5_0_TDM_MODE_IC_1_SHIFT   0
