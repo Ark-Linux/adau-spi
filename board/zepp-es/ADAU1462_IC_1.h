@@ -1,8 +1,8 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\up\ADAU1462_IC_1.h
+ * File:           D:\Tymphany\Projects On-going\2019 B&W_Zeppelin NG\EQ\release\ADAU1462_IC_1.h
  *
- * Created:        Thursday, December 5, 2019 4:53:18 PM
- * Description:    20191203_Zeppelin_NG_EQ0.02:IC 1 program data.
+ * Created:        Thursday, December 12, 2019 5:25:34 PM
+ * Description:    ADAU1462:IC 1 program data.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
@@ -23,7 +23,7 @@
 #include "ADAU1462_IC_1_REG.h"
 
 #define DEVICE_ARCHITECTURE_IC_1                  "ADAU1462"
-#define DEVICE_ADDR_IC_1                          0x0
+#define DEVICE_ADDR_IC_1                          0x1
 
 /* DSP Ram Data */
 #define DM1_DATA_SIZE_IC_1 1904
@@ -2014,7 +2014,7 @@ ADI_REG_TYPE Param_Data_IC_1[PARAM_SIZE_IC_1] = {
 0x00, 0x00, 0x00, 0x00, 
 0x00, 0x00, 0x00, 0x00, 
 0x00, 0x00, 0x00, 0x00, 
-0x00, 0x19, 0x99, 0x9A, 
+0x01, 0x00, 0x00, 0x00, 
 0x00, 0xFF, 0xE4, 0xB3, 
 0x00, 0x00, 0x1B, 0x4D, 
 0x00, 0x00, 0x00, 0x00, 

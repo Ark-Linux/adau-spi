@@ -1,8 +1,8 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\up\ADAU1462_IC_1_REG.h
+ * File:           D:\Tymphany\Projects On-going\2019 B&W_Zeppelin NG\EQ\release\ADAU1462_IC_1_REG.h
  *
- * Created:        Thursday, December 5, 2019 4:53:18 PM
- * Description:    20191203_Zeppelin_NG_EQ0.02:IC 1 control register definitions.
+ * Created:        Thursday, December 12, 2019 5:25:34 PM
+ * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR

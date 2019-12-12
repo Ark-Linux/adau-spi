@@ -1,8 +1,8 @@
 /*
- * File:           D:\Zoro_DATA\Project\Zeppelin\ADAU1462\up\ADAU1462_IC_1_PARAM.h
+ * File:           D:\Tymphany\Projects On-going\2019 B&W_Zeppelin NG\EQ\release\ADAU1462_IC_1_PARAM.h
  *
- * Created:        Thursday, December 5, 2019 4:53:18 PM
- * Description:    20191203_Zeppelin_NG_EQ0.02:IC 1 parameter RAM definitions.
+ * Created:        Thursday, December 12, 2019 5:25:34 PM
+ * Description:    ADAU1462:IC 1 parameter RAM definitions.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
@@ -2475,7 +2475,7 @@ Low DSP MIPS. Average Enable*/
 #define MOD_SINGLE1_COUNT                              3
 #define MOD_SINGLE1_DEVICE                             "IC1"
 #define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1TARGET_ADDR 645
-#define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1TARGET_VALUE SIGMASTUDIOTYPE_8_24_CONVERT(0.1)
+#define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1TARGET_VALUE SIGMASTUDIOTYPE_8_24_CONVERT(1)
 #define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1TARGET_TYPE SIGMASTUDIOTYPE_8_24
 #define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1TARGET_MEMORYPAGE 0
 #define MOD_SINGLE1_ALG0_SWGAINOPTADAU145XALG1ALPHA0_ADDR 646
