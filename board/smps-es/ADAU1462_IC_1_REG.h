@@ -1,7 +1,7 @@
 /*
- * File:           C:\Users\Daniel.li\Desktop\temp\ADAU1462_IC_1_REG.h
+ * File:           D:\Tymphany\Projects On-going\2019 B&W_SMPS\EQ\release\ADAU1462_IC_1_REG.h
  *
- * Created:        Wednesday, December 11, 2019 10:54:06 PM
+ * Created:        Thursday, December 12, 2019 3:29:36 PM
  * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
