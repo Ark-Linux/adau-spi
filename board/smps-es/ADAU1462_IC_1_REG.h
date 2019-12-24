@@ -1,7 +1,7 @@
 /*
  * File:           D:\Tymphany\Projects On-going\2019 B&W_SMPS\EQ\release\ADAU1462_IC_1_REG.h
  *
- * Created:        Thursday, December 12, 2019 3:29:36 PM
+ * Created:        Thursday, December 19, 2019 7:18:17 PM
  * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
