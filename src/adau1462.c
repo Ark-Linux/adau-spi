@@ -42,7 +42,8 @@ TYMPHANY LTD
 #define ADAUDSP_MAX_WRITE_BYTES     200
 #define ADAUDSP_PROGRAM_ADDR_STEP   (ADAUDSP_MAX_WRITE_BYTES / BYTES_PER_PROGRAM_ADDR)   // program data : 5 bytes per register address
 #define ADAUDSP_PARAM_ADDR_STEP     (ADAUDSP_MAX_WRITE_BYTES / BYTES_PER_PARAM_ADDR)   // parameter data : 4 bytes per register address
-
+#define DSP_VOLUME_CONTROL_1 	(MOD_DSP_VOLUME_ALG0_SWGAINOPTADAU145XALG1TARGET_ADDR)
+#define DSP_VOLUME_CONTROL_2 	(MOD_DSP_VOLUME_ALG0_SWGAINOPTADAU145XALG1ALPHA0_ADDR)
 int main(int argc, char *argv[])
 {
 	int i;
@@ -55,8 +56,8 @@ int main(int argc, char *argv[])
 	}
 	default_download_IC_1();
 
-	spi_backend_ops.read(30, 4, buf);
-	printf("init done and read address 0x1E:\n");
+	spi_backend_ops.read(DSP_VOLUME_CONTROL_1, 4, buf);
+	printf("init done and read address %x:\n",DSP_VOLUME_CONTROL_1);
         for(i = 0; i < 4; i++)
         printf(" %.2x",buf[i]);
         printf("\n");
@@ -64,8 +65,8 @@ int main(int argc, char *argv[])
 	for(i = 0; i < 8; i++)
                 buf[i] = 0;
 
-	spi_backend_ops.read(31, 8, buf);
-        printf("init done and read address 0x1F:\n");
+	spi_backend_ops.read(DSP_VOLUME_CONTROL_2, 8, buf);
+        printf("init done and read address %x:\n",DSP_VOLUME_CONTROL_2);
         for(i = 0; i < 8; i++)
         printf(" %.2x",buf[i]);
         printf("\n");
