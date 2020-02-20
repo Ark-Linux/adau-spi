@@ -1,7 +1,7 @@
 /*
  * File:           D:\Tymphany\Projects On-going\2019 B&W_Zeppelin NG\EQ\release\ADAU1462_IC_1_REG.h
  *
- * Created:        Tuesday, January 7, 2020 3:51:46 PM
+ * Created:        Wednesday, February 19, 2020 11:38:24 AM
  * Description:    ADAU1462:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,
